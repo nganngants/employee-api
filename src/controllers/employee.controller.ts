@@ -9,8 +9,7 @@ import {
 } from '@loopback/repository';
 import {
   del, get,
-  getModelSchemaRef, param, patch, post, put, requestBody,
-  response
+  getModelSchemaRef, param, patch, post, put, requestBody, response
 } from '@loopback/rest';
 import _ from 'lodash';
 import {FILE_UPLOAD_SERVICE} from '../keys';
@@ -23,6 +22,7 @@ export class EmployeeController {
     @repository(EmployeeRepository)
     public employeeRepository : EmployeeRepository,
     @inject(FILE_UPLOAD_SERVICE) private fileUploadHandler: FileUpload,
+    //@inject('controllers.UploadController') private upload: UploadController,
   ) {}
 
   @post('/employees')
@@ -42,10 +42,26 @@ export class EmployeeController {
       },
     })
     employee: Omit<Employee, 'id' >,
-    @inject('services.FileUploadProvider') fileUploadProvider: FileUpload,
+    //request: Request,
+    //@inject(RestBindings.Http.RESPONSE) res: Response,
     ): Promise<Employee> {
-    const certList = employee.certificateList;
-    const work = employee.working;
+
+      // const uploadedFiles = await new Promise<Express.Multer.File[]>((resolve, reject) => {
+      //   this.fileUploadHandler(request, res, (err) => {
+      //     if (err) reject(err);
+      //     else resolve(request.files as Express.Multer.File[]);
+      //   });
+      // });
+
+      // const file = uploadedFiles.find(f => f.fieldname === 'avatar');
+      //const employee = request.body;
+      // if (file) {
+      //   //employee.avatar = file.buffer;
+      //   employee.avatarURL = file.path;
+      //   //employee.avatarURL = `/employees/${employee.id}/avatar`;
+      // }
+    const certList = employee.certificateList || null;
+    const work = employee.working || null;
     const toCreate = _.omit(employee, 'certificateList', 'working');
     const created = await this.employeeRepository.create(toCreate);
     if (Array.isArray(certList))

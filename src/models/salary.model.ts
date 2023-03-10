@@ -1,4 +1,4 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Employee} from './employee.model';
 import {SalaryCoef} from './salary-coef.model';
 
@@ -21,19 +21,19 @@ export class Salary extends Entity {
     type: 'date',
     default: Date(),
   })
-  AppliedDay?: string;
+  AppliedDate?: string;
 
   @property({
     type: 'date',
     default: Date(),
   })
-  CreatedDay?: string;
+  CreatedDate?: string;
 
   @property({
     type: 'date',
     default: Date(),
   })
-  UpdatedDay?: string;
+  UpdatedDate?: string;
 
   @belongsTo(() => Employee)
   employeeId: string;

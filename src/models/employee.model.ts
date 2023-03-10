@@ -61,9 +61,9 @@ export class Employee extends Entity {
   UpdatedDate?: string;
 
   @property({
-    type: 'buffer',
+    type: 'string',
   })
-  avatar?: Buffer;
+  avatarURL?: string;
 
   @hasMany(() => Certificate)
   certificates?: Certificate[];

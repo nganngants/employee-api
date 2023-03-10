@@ -21,6 +21,17 @@ export class SalaryCoef extends Entity {
   })
   bonusCoef?: number;
 
+  @property({
+    type: 'date',
+    default: Date(),
+  })
+  CreatedDate?: string;
+
+  @property({
+    type: 'date',
+    default: Date(),
+  })
+  UpdatedDate?: string;
 
   constructor(data?: Partial<SalaryCoef>) {
     super(data);
