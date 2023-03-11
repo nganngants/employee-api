@@ -5,8 +5,8 @@
     "version": "0.0.1",
     "description": "api for employees management",
     "contact": {
-      "name": "Ngan Vo",
-      "email": "nganngants@gmail.com"
+      "name": "Elise",
+      "email": "21520069@gm.uit.edu.vn"
     }
   },
   "paths": {
@@ -1209,6 +1209,191 @@
         "operationId": "EmployeeCertificateController.delete"
       }
     },
+    "/employees/{id}/salaries": {
+      "post": {
+        "x-controller-name": "EmployeeSalaryController",
+        "x-operation-name": "create",
+        "tags": [
+          "EmployeeSalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSalaryInEmployee"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmployeeSalaryController.create"
+      },
+      "patch": {
+        "x-controller-name": "EmployeeSalaryController",
+        "x-operation-name": "patch",
+        "tags": [
+          "EmployeeSalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee.Salary PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Salary.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Salary>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EmployeeSalaryController.patch"
+      },
+      "get": {
+        "x-controller-name": "EmployeeSalaryController",
+        "x-operation-name": "find",
+        "tags": [
+          "EmployeeSalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Employee has many Salary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Salary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmployeeSalaryController.find"
+      },
+      "delete": {
+        "x-controller-name": "EmployeeSalaryController",
+        "x-operation-name": "delete",
+        "tags": [
+          "EmployeeSalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee.Salary DELETE success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Salary.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Salary>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EmployeeSalaryController.delete"
+      }
+    },
     "/employees/{id}/workings": {
       "post": {
         "x-controller-name": "EmployeeWorkingController",
@@ -1776,6 +1961,44 @@
         "operationId": "PingController.ping"
       }
     },
+    "/salaries/count": {
+      "get": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "count",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Salary model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Salary.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Salary>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryController.count"
+      }
+    },
     "/salaries/{id}/employee": {
       "get": {
         "x-controller-name": "SalaryEmployeeController",
@@ -1844,6 +2067,574 @@
           }
         ],
         "operationId": "SalarySalaryCoefController.getSalaryCoef"
+      }
+    },
+    "/salaries/{id}": {
+      "put": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Salary PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Salary"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "SalaryController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Salary PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "SalaryController.updateById"
+      },
+      "get": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "findById",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Salary model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryController.findById"
+      },
+      "delete": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Salary DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "SalaryController.deleteById"
+      }
+    },
+    "/salaries": {
+      "post": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "create",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Salary model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSalary"
+              }
+            }
+          }
+        },
+        "operationId": "SalaryController.create"
+      },
+      "patch": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Salary PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Salary.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Salary>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryPartial"
+              }
+            }
+          }
+        },
+        "operationId": "SalaryController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "SalaryController",
+        "x-operation-name": "find",
+        "tags": [
+          "SalaryController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Salary model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SalaryWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryController.find"
+      }
+    },
+    "/salary-coefs/count": {
+      "get": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "count",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "200": {
+            "description": "SalaryCoef model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "SalaryCoef.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<SalaryCoef>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryCoefController.count"
+      }
+    },
+    "/salary-coefs/{id}": {
+      "put": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "SalaryCoef PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryCoef"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "SalaryCoefController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "SalaryCoef PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryCoefPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "SalaryCoefController.updateById"
+      },
+      "get": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "findById",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "200": {
+            "description": "SalaryCoef model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryCoefWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryCoef.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryCoefController.findById"
+      },
+      "delete": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "SalaryCoef DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "SalaryCoefController.deleteById"
+      }
+    },
+    "/salary-coefs": {
+      "post": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "create",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "200": {
+            "description": "SalaryCoef model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryCoef"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSalaryCoef"
+              }
+            }
+          }
+        },
+        "operationId": "SalaryCoefController.create"
+      },
+      "patch": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "200": {
+            "description": "SalaryCoef PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "SalaryCoef.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<SalaryCoef>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryCoefPartial"
+              }
+            }
+          }
+        },
+        "operationId": "SalaryCoefController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "SalaryCoefController",
+        "x-operation-name": "find",
+        "tags": [
+          "SalaryCoefController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of SalaryCoef model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SalaryCoefWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryCoef.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "SalaryCoefController.find"
       }
     },
     "/workings/count": {
@@ -2700,6 +3491,77 @@
         "additionalProperties": true,
         "x-typescript-type": "WorkingWithRelations"
       },
+      "SalaryCoefWithRelations": {
+        "title": "SalaryCoefWithRelations",
+        "type": "object",
+        "description": "(tsType: SalaryCoefWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "coef": {
+            "type": "number"
+          },
+          "bonusCoef": {
+            "type": "number"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "coef"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "SalaryCoefWithRelations"
+      },
+      "SalaryWithRelations": {
+        "title": "SalaryWithRelations",
+        "type": "object",
+        "description": "(tsType: SalaryWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "AppliedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string"
+          },
+          "salaryCoefId": {
+            "type": "string"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/EmployeeWithRelations"
+          },
+          "salaryCoef": {
+            "$ref": "#/components/schemas/SalaryCoefWithRelations"
+          }
+        },
+        "required": [
+          "amount"
+        ],
+        "additionalProperties": true,
+        "x-typescript-type": "SalaryWithRelations"
+      },
       "EmployeeWithRelations": {
         "title": "EmployeeWithRelations",
         "type": "object",
@@ -2751,6 +3613,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/WorkingWithRelations"
+            }
+          },
+          "salaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SalaryWithRelations"
             }
           }
         },
@@ -2856,6 +3724,106 @@
         ],
         "additionalProperties": true,
         "x-typescript-type": "@loopback/repository-json-schema#Optional<Omit<Certificate, 'id'>, 'employeeId'>"
+      },
+      "Salary": {
+        "title": "Salary",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "AppliedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string"
+          },
+          "salaryCoefId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount"
+        ],
+        "additionalProperties": true
+      },
+      "NewSalaryInEmployee": {
+        "title": "NewSalaryInEmployee",
+        "type": "object",
+        "description": "(tsType: @loopback/repository-json-schema#Optional<Omit<Salary, 'id'>, 'employeeId'>, schemaOptions: { title: 'NewSalaryInEmployee', exclude: [ 'id' ], optional: [ 'employeeId' ] })",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "AppliedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string"
+          },
+          "salaryCoefId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount"
+        ],
+        "additionalProperties": true,
+        "x-typescript-type": "@loopback/repository-json-schema#Optional<Omit<Salary, 'id'>, 'employeeId'>"
+      },
+      "SalaryPartial": {
+        "title": "SalaryPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Salary>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "AppliedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string"
+          },
+          "salaryCoefId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true,
+        "x-typescript-type": "Partial<Salary>"
       },
       "NewWorkingInEmployee": {
         "title": "NewWorkingInEmployee",
@@ -2963,6 +3931,91 @@
           "coef"
         ],
         "additionalProperties": false
+      },
+      "NewSalaryCoef": {
+        "title": "NewSalaryCoef",
+        "type": "object",
+        "description": "(tsType: Omit<SalaryCoef, 'id'>, schemaOptions: { title: 'NewSalaryCoef', exclude: [ 'id' ] })",
+        "properties": {
+          "coef": {
+            "type": "number"
+          },
+          "bonusCoef": {
+            "type": "number"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "coef"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<SalaryCoef, 'id'>"
+      },
+      "SalaryCoefPartial": {
+        "title": "SalaryCoefPartial",
+        "type": "object",
+        "description": "(tsType: Partial<SalaryCoef>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "coef": {
+            "type": "number"
+          },
+          "bonusCoef": {
+            "type": "number"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<SalaryCoef>"
+      },
+      "NewSalary": {
+        "title": "NewSalary",
+        "type": "object",
+        "description": "(tsType: Omit<Salary, 'id'>, schemaOptions: { title: 'NewSalary', exclude: [ 'id' ] })",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "AppliedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string"
+          },
+          "salaryCoefId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount"
+        ],
+        "additionalProperties": true,
+        "x-typescript-type": "Omit<Salary, 'id'>"
       },
       "NewWorking": {
         "title": "NewWorking",
@@ -3470,7 +4523,8 @@
             "type": "string",
             "enum": [
               "certificates",
-              "workings"
+              "workings",
+              "salaries"
             ]
           },
           "scope": {
@@ -3706,6 +4760,419 @@
             "additionalProperties": true
           }
         }
+      },
+      "Salary.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Salary.ScopeFilter"
+      },
+      "Salary.IncludeFilter.Items": {
+        "title": "Salary.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "employee",
+              "salaryCoef"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Salary.ScopeFilter"
+          }
+        }
+      },
+      "Salary.Filter": {
+        "type": "object",
+        "title": "Salary.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "amount": {
+                    "type": "boolean"
+                  },
+                  "AppliedDate": {
+                    "type": "boolean"
+                  },
+                  "CreatedDate": {
+                    "type": "boolean"
+                  },
+                  "UpdatedDate": {
+                    "type": "boolean"
+                  },
+                  "employeeId": {
+                    "type": "boolean"
+                  },
+                  "salaryCoefId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Salary.Fields"
+          },
+          "include": {
+            "title": "Salary.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Salary.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Salary>"
+      },
+      "Salary.Filter1": {
+        "type": "object",
+        "title": "Salary.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Salary.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "amount": {
+                    "type": "boolean"
+                  },
+                  "AppliedDate": {
+                    "type": "boolean"
+                  },
+                  "CreatedDate": {
+                    "type": "boolean"
+                  },
+                  "UpdatedDate": {
+                    "type": "boolean"
+                  },
+                  "employeeId": {
+                    "type": "boolean"
+                  },
+                  "salaryCoefId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Salary.Fields"
+          },
+          "include": {
+            "title": "Salary.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Salary.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Salary>"
+      },
+      "SalaryCoef.Filter": {
+        "type": "object",
+        "title": "SalaryCoef.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "coef": {
+                    "type": "boolean"
+                  },
+                  "bonusCoef": {
+                    "type": "boolean"
+                  },
+                  "CreatedDate": {
+                    "type": "boolean"
+                  },
+                  "UpdatedDate": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "coef",
+                    "bonusCoef",
+                    "CreatedDate",
+                    "UpdatedDate"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "SalaryCoef.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<SalaryCoef>"
+      },
+      "SalaryCoef.Filter1": {
+        "type": "object",
+        "title": "SalaryCoef.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "SalaryCoef.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "coef": {
+                    "type": "boolean"
+                  },
+                  "bonusCoef": {
+                    "type": "boolean"
+                  },
+                  "CreatedDate": {
+                    "type": "boolean"
+                  },
+                  "UpdatedDate": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "coef",
+                    "bonusCoef",
+                    "CreatedDate",
+                    "UpdatedDate"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "SalaryCoef.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<SalaryCoef>"
       },
       "Working.ScopeFilter": {
         "type": "object",
