@@ -42,40 +42,37 @@ export class EmployeeController {
       },
     })
     employee: Omit<Employee, 'id' >,
-    //request: Request,
-    //@inject(RestBindings.Http.RESPONSE) res: Response,
     ): Promise<Employee> {
 
-      // const uploadedFiles = await new Promise<Express.Multer.File[]>((resolve, reject) => {
-      //   this.fileUploadHandler(request, res, (err) => {
-      //     if (err) reject(err);
-      //     else resolve(request.files as Express.Multer.File[]);
-      //   });
-      // });
-
-      // const file = uploadedFiles.find(f => f.fieldname === 'avatar');
-      //const employee = request.body;
-      // if (file) {
-      //   //employee.avatar = file.buffer;
-      //   employee.avatarURL = file.path;
-      //   //employee.avatarURL = `/employees/${employee.id}/avatar`;
-      // }
     const certList = employee.certificateList || null;
     const work = employee.working || null;
-    const toCreate = _.omit(employee, 'certificateList', 'working');
+    const salary = employee.salary || null;
+    const toCreate = _.omit(employee, 'certificateList', 'working', 'salary');
     const created = await this.employeeRepository.create(toCreate);
-    if (Array.isArray(certList))
-    {
-      for (const cert of certList) {
-        await this.employeeRepository.certificates(created.id).create(cert);
+    try{
+      if (Array.isArray(certList))
+      {
+        for (const cert of certList) {
+          await this.employeeRepository.certificates(created.id).create(cert);
+        }
+      }
+      if (work != null)
+      {
+        await this.employeeRepository.workings(created.id).create(work);
+      }
+
+      if (salary != null)
+      {
+        await this.employeeRepository.salaries(created.id).create(salary);
       }
     }
-    if (work != null)
-    {
-      await this.employeeRepository.workings(created.id).create(work);
+    catch (err) {
+      await this.employeeRepository.deleteById(created.id);
+      throw err;
     }
 
-    return this.employeeRepository.findById(created.id, { include: [{relation: 'certificates'}, {relation: 'workings'}] });
+
+    return this.employeeRepository.findById(created.id, { include: [{relation: 'certificates'}, {relation: 'workings'}, {relation: 'salaries'}] });
 
   }
 

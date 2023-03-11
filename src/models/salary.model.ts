@@ -15,7 +15,7 @@ export class Salary extends Entity {
     type: 'number',
     required: true,
   })
-  amout: number;
+  amount: number;
 
   @property({
     type: 'date',

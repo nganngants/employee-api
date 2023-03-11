@@ -1,6 +1,7 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Certificate} from './certificate.model';
 import {Working} from './working.model';
+import {Salary} from './salary.model';
 
 @model({settings: {strict: false}})
 export class Employee extends Entity {
@@ -70,6 +71,9 @@ export class Employee extends Entity {
 
   @hasMany(() => Working)
   workings?: Working[];
+
+  @hasMany(() => Salary)
+  salaries: Salary[];
   //@hasMany(() => Department, {through : {model: () => Working}})
   //departments?: Department[];
 

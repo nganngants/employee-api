@@ -15,3 +15,6 @@ export * from './working-employee.controller';
 export * from './working.controller';
 
 
+export * from './salary.controller';
+export * from './salary-coef.controller';
+export * from './employee-salary.controller';
